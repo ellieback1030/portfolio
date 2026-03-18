@@ -4,42 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>백연우 — Portfolio 2026</title>
+  <link rel="stylesheet" href="style.css" />
   <style>
-    :root {
-      --lavender: #E6E6FA;
-      --lavender-mid: #C4B5F4;
-      --lavender-dark: #7C6FCD;
-      --lavender-deep: #5B4FBE;
-      --lavender-bg: #F5F4FF;
-      --fg: #1a1a2e;
-      --fg-muted: #6b6b80;
-      --border: #e8e8f0;
-      --white: #ffffff;
-      --radius: 12px;
-      --radius-lg: 20px;
-    }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
-      background: var(--white); color: var(--fg);
-      font-size: 15px; line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
-    a { text-decoration: none; color: inherit; }
-    img { display: block; max-width: 100%; }
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 28px; }
-
-    .fade-up { opacity: 0; transform: translateY(20px); transition: opacity .5s ease, transform .5s ease; }
-    .fade-up.visible { opacity: 1; transform: translateY(0); }
-
-    /* ── NAV ── */
-    .nav {
-      position: sticky; top: 0; z-index: 100;
-      background: rgba(255,255,255,0.9); backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border); height: 64px;
-    }
-    .nav-inner { height: 100%; display: flex; align-items: center; gap: 16px; }
+    /* ── NAV extras (portfolio-works specific) ── */
+    .nav-inner { gap: 16px; }
     .nav-back {
       display: flex; align-items: center; gap: 6px;
       font-size: 13px; font-weight: 600; color: var(--lavender-dark);
@@ -47,24 +15,11 @@
       transition: background .15s;
     }
     .nav-back:hover { background: var(--lavender-mid); }
-    .nav-logo { font-size: 17px; font-weight: 800; color: var(--lavender-deep); }
     .nav-sep { color: var(--border); font-size: 18px; }
     .nav-title { font-size: 14px; color: var(--fg-muted); font-weight: 500; }
-    .nav-links { display: flex; align-items: center; gap: 2px; flex: 1; }
-    .nav-link {
-      padding: 5px 12px; border-radius: 8px;
-      font-size: 13px; font-weight: 500; color: var(--fg-muted);
-      transition: all .15s; white-space: nowrap;
-    }
-    .nav-link:hover, .nav-link.active { color: var(--lavender-deep); background: var(--lavender); }
-    .nav-right { margin-left: auto; }
-    .btn {
-      display: inline-flex; align-items: center; gap: 6px;
-      border-radius: var(--radius); font-size: 13px; font-weight: 600;
-      padding: 8px 18px; cursor: pointer; border: none; transition: all .18s; white-space: nowrap;
-    }
-    .btn-primary { background: var(--lavender-deep); color: var(--white); }
-    .btn-primary:hover { background: #4a3fad; }
+    /* Override btn font-size for this page */
+    .btn { font-size: 13px; padding: 8px 18px; }
+    .nav-right { margin-left: auto; display: flex; }
 
     /* ── COVER ── */
     .cover {
@@ -116,18 +71,10 @@
       font-size: 11px; font-weight: 600; color: rgba(255,255,255,0.9);
     }
 
-    /* ── SECTION COMMON ── */
+    /* ── SECTION overrides for portfolio-works ── */
     .section { padding: 72px 0; }
-    .section-alt { background: var(--lavender-bg); }
-    .section-dark { background: var(--fg); }
-    .sec-label {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-size: 11px; font-weight: 700; letter-spacing: .1em;
-      text-transform: uppercase; color: var(--lavender-dark); margin-bottom: 10px;
-    }
-    .sec-label::before { content: ''; width: 16px; height: 2px; background: var(--lavender-dark); border-radius: 1px; }
-    .sec-h2 { font-size: 32px; font-weight: 800; letter-spacing: -0.8px; line-height: 1.2; margin-bottom: 6px; }
-    .sec-lead { font-size: 15px; color: var(--fg-muted); line-height: 1.65; }
+    .sec-h2 { font-size: 32px; letter-spacing: -0.8px; }
+    .sec-lead { font-size: 15px; }
     .sec-header { margin-bottom: 44px; }
 
     /* ── ABOUT ── */
@@ -255,11 +202,6 @@
     }
     .img-card img { width: 100%; height: 100%; object-fit: contain; display: block; padding: 3px; border-radius: var(--radius); }
     .img-card.cover-fit img { object-fit: cover; padding: 0; }
-
-    /* ── FOOTER ── */
-    .footer { background: var(--fg); color: rgba(255,255,255,0.45); padding: 28px 0; font-size: 13px; }
-    .footer-inner { display: flex; align-items: center; justify-content: space-between; }
-    .footer-logo { color: var(--white); font-weight: 700; }
 
     @media (max-width: 860px) {
       .cover-inner { grid-template-columns: 1fr; }
@@ -685,19 +627,6 @@
     </div>
   </footer>
 
-  <script>
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
-    document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
-
-    const sections = document.querySelectorAll('[id]');
-    const navLinks = document.querySelectorAll('.nav-link');
-    window.addEventListener('scroll', () => {
-      let current = '';
-      sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.id; });
-      navLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + current));
-    });
-  </script>
+  <script src="app.js"></script>
 </body>
 </html>

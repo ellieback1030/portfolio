@@ -4,95 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>백연우 — Character & Brand Designer Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
   <style>
-    /* ── Color Tokens ── */
-    :root {
-      --lavender: #E6E6FA;
-      --lavender-mid: #C4B5F4;
-      --lavender-dark: #7C6FCD;
-      --lavender-deep: #5B4FBE;
-      --lavender-bg: #F5F4FF;
-      --fg: #1a1a2e;
-      --fg-muted: #6b6b80;
-      --border: #e8e8f0;
-      --card-bg: #ffffff;
-      --white: #ffffff;
-      --radius: 12px;
-      --radius-lg: 20px;
-    }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
-      background: var(--white);
-      color: var(--fg);
-      font-size: 15px;
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-    }
-    a { text-decoration: none; color: inherit; }
-    img { display: block; max-width: 100%; }
-
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 28px; }
-
-    /* ── Fade-up animation ── */
-    .fade-up {
-      opacity: 0;
-      transform: translateY(24px);
-      transition: opacity 0.55s ease, transform 0.55s ease;
-    }
-    .fade-up.visible { opacity: 1; transform: translateY(0); }
-
-    /* ════════════════════════
-       NAV
-    ════════════════════════ */
-    .nav {
-      position: sticky; top: 0; z-index: 100;
-      background: rgba(255,255,255,0.88);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
-      height: 64px;
-    }
-    .nav-inner {
-      height: 100%; display: flex; align-items: center;
-    }
-    .nav-logo {
-      font-size: 17px; font-weight: 800;
-      letter-spacing: -0.5px; margin-right: 36px; flex-shrink: 0;
-      color: var(--lavender-deep);
-    }
-    .nav-links { display: flex; align-items: center; gap: 2px; flex: 1; }
-    .nav-link {
-      padding: 6px 14px; border-radius: 8px;
-      font-size: 14px; font-weight: 500; color: var(--fg-muted);
-      transition: all .15s; white-space: nowrap;
-    }
-    .nav-link:hover, .nav-link.active {
-      color: var(--lavender-deep);
-      background: var(--lavender);
-    }
-    .nav-right { margin-left: auto; display: flex; gap: 8px; }
-    .btn {
-      display: inline-flex; align-items: center; gap: 6px;
-      border-radius: var(--radius); font-size: 14px; font-weight: 600;
-      padding: 9px 20px; cursor: pointer; border: none; transition: all .18s;
-      white-space: nowrap;
-    }
-    .btn-primary {
-      background: var(--lavender-deep); color: var(--white);
-    }
-    .btn-primary:hover { background: #4a3fad; }
-    .btn-outline {
-      background: transparent; color: var(--lavender-deep);
-      border: 1.5px solid var(--lavender-dark);
-    }
-    .btn-outline:hover { background: var(--lavender); }
-    .btn-ghost {
-      background: transparent; color: var(--fg-muted); border: 1px solid var(--border);
-    }
-    .btn-ghost:hover { background: var(--lavender-bg); color: var(--lavender-deep); }
-
     /* ════════════════════════
        HERO
     ════════════════════════ */
@@ -205,40 +118,6 @@
       color: var(--lavender-deep); transition: all .15s;
     }
     .hero-link-btn:hover { background: var(--lavender); }
-
-    /* ════════════════════════
-       SECTION COMMON
-    ════════════════════════ */
-    .section { padding: 80px 0; }
-    .section-alt { background: var(--lavender-bg); }
-    .section-dark {
-      background: var(--lavender-deep); color: var(--white);
-    }
-    .sec-label {
-      display: inline-flex; align-items: center; gap: 8px;
-      font-size: 11px; font-weight: 700; letter-spacing: .1em;
-      text-transform: uppercase; color: var(--lavender-dark);
-      margin-bottom: 10px;
-    }
-    .section-dark .sec-label { color: var(--lavender-mid); }
-    .sec-label::before {
-      content: ''; width: 18px; height: 2px;
-      background: var(--lavender-dark); border-radius: 1px;
-    }
-    .section-dark .sec-label::before { background: var(--lavender-mid); }
-    .sec-h2 {
-      font-size: 36px; font-weight: 800; letter-spacing: -1px;
-      line-height: 1.15; margin-bottom: 8px;
-    }
-    .sec-lead {
-      font-size: 16px; color: var(--fg-muted); line-height: 1.65;
-    }
-    .section-dark .sec-lead { color: rgba(255,255,255,0.7); }
-    .sec-header { margin-bottom: 48px; }
-    .sec-header-row {
-      display: flex; align-items: flex-end; justify-content: space-between;
-      flex-wrap: wrap; gap: 16px; margin-bottom: 48px;
-    }
 
     /* ════════════════════════
        ABOUT / INTRO
@@ -507,18 +386,6 @@
       border-color: rgba(255,255,255,0.4);
     }
     .contact-link-icon { font-size: 20px; }
-
-    /* ════════════════════════
-       FOOTER
-    ════════════════════════ */
-    .footer {
-      background: var(--fg); color: rgba(255,255,255,0.5);
-      padding: 32px 0; font-size: 13px;
-    }
-    .footer-inner {
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .footer-logo { color: var(--white); font-weight: 700; font-size: 15px; }
 
     /* ════════════════════════
        RESPONSIVE
@@ -994,28 +861,6 @@
     </div>
   </footer>
 
-  <script>
-    // Scroll-triggered fade-up
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) { e.target.classList.add('visible'); }
-      });
-    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-
-    // Active nav highlight
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-link');
-    window.addEventListener('scroll', () => {
-      let current = '';
-      sections.forEach(s => {
-        if (window.scrollY >= s.offsetTop - 120) current = s.id;
-      });
-      navLinks.forEach(l => {
-        l.classList.toggle('active', l.getAttribute('href') === '#' + current);
-      });
-    });
-  </script>
+  <script src="app.js"></script>
 </body>
 </html>
