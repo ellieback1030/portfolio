@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>백연우 — Character & Brand Designer Portfolio</title>
+  <style>
+    /* ── Color Tokens ── */
+    :root {
+      --lavender: #E6E6FA;
+      --lavender-mid: #C4B5F4;
+      --lavender-dark: #7C6FCD;
+      --lavender-deep: #5B4FBE;
+      --lavender-bg: #F5F4FF;
+      --fg: #1a1a2e;
+      --fg-muted: #6b6b80;
+      --border: #e8e8f0;
+      --card-bg: #ffffff;
+      --white: #ffffff;
+      --radius: 12px;
+      --radius-lg: 20px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', sans-serif;
+      background: var(--white);
+      color: var(--fg);
+      font-size: 15px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 28px; }
+
+    /* ── Fade-up animation ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ════════════════════════
+       NAV
+    ════════════════════════ */
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      height: 64px;
+    }
+    .nav-inner {
+      height: 100%; display: flex; align-items: center;
+    }
+    .nav-logo {
+      font-size: 17px; font-weight: 800;
+      letter-spacing: -0.5px; margin-right: 36px; flex-shrink: 0;
+      color: var(--lavender-deep);
+    }
+    .nav-links { display: flex; align-items: center; gap: 2px; flex: 1; }
+    .nav-link {
+      padding: 6px 14px; border-radius: 8px;
+      font-size: 14px; font-weight: 500; color: var(--fg-muted);
+      transition: all .15s; white-space: nowrap;
+    }
+    .nav-link:hover, .nav-link.active {
+      color: var(--lavender-deep);
+      background: var(--lavender);
+    }
+    .nav-right { margin-left: auto; display: flex; gap: 8px; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      border-radius: var(--radius); font-size: 14px; font-weight: 600;
+      padding: 9px 20px; cursor: pointer; border: none; transition: all .18s;
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: var(--lavender-deep); color: var(--white);
+    }
+    .btn-primary:hover { background: #4a3fad; }
+    .btn-outline {
+      background: transparent; color: var(--lavender-deep);
+      border: 1.5px solid var(--lavender-dark);
+    }
+    .btn-outline:hover { background: var(--lavender); }
+    .btn-ghost {
+      background: transparent; color: var(--fg-muted); border: 1px solid var(--border);
+    }
+    .btn-ghost:hover { background: var(--lavender-bg); color: var(--lavender-deep); }
+
+    /* ════════════════════════
+       HERO
+    ════════════════════════ */
+    .hero {
+      background: linear-gradient(135deg, var(--lavender-bg) 0%, var(--lavender) 50%, #d4c8f8 100%);
+      padding: 100px 0 80px;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; top: -120px; right: -80px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(124,111,205,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      display: grid; grid-template-columns: 1fr 380px;
+      align-items: center; gap: 60px;
+    }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--white); border: 1px solid var(--lavender-mid);
+      border-radius: 9999px; padding: 5px 14px;
+      font-size: 12px; font-weight: 600; color: var(--lavender-dark);
+      text-transform: uppercase; letter-spacing: .06em;
+      margin-bottom: 22px;
+    }
+    .hero-tag-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--lavender-deep); flex-shrink: 0;
+    }
+    .hero h1 {
+      font-size: 54px; font-weight: 800; letter-spacing: -2px;
+      line-height: 1.08; margin-bottom: 18px; color: var(--fg);
+    }
+    .hero h1 em {
+      font-style: normal; color: var(--lavender-deep);
+    }
+    .hero-sub {
+      font-size: 18px; color: var(--fg-muted); line-height: 1.65;
+      max-width: 500px; margin-bottom: 34px;
+    }
+    .hero-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 32px; }
+    .hero-meta {
+      display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+    }
+    .hero-meta-item {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 13px; color: var(--fg-muted);
+    }
+    .hero-meta-item svg { opacity: 0.6; }
+
+    /* Profile Card */
+    .hero-card {
+      background: var(--white);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: 0 20px 60px rgba(91,79,190,0.12), 0 4px 16px rgba(0,0,0,0.06);
+      border: 1px solid rgba(196,181,244,0.4);
+    }
+    .hero-photo {
+      width: 100%; aspect-ratio: 4/3;
+      border-radius: 12px; overflow: hidden;
+      background: linear-gradient(135deg, var(--lavender) 0%, var(--lavender-mid) 100%);
+      margin-bottom: 20px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 64px; color: var(--lavender-dark);
+    }
+    .hero-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-name-row {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 4px;
+    }
+    .hero-name { font-size: 20px; font-weight: 700; letter-spacing: -0.4px; }
+    .avail-badge {
+      display: flex; align-items: center; gap: 6px;
+      background: #f0fdf4; border: 1px solid #86efac;
+      border-radius: 9999px; padding: 4px 10px;
+      font-size: 11px; font-weight: 600; color: #16a34a;
+    }
+    .avail-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: #22c55e;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%,100% { box-shadow: 0 0 0 2px rgba(34,197,94,0.2); }
+      50% { box-shadow: 0 0 0 5px rgba(34,197,94,0.05); }
+    }
+    .hero-role { font-size: 13px; color: var(--fg-muted); margin-bottom: 16px; }
+    .hero-stats {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 10px; margin-bottom: 16px;
+    }
+    .hero-stat {
+      background: var(--lavender-bg);
+      border: 1px solid var(--lavender);
+      border-radius: 10px; padding: 12px 8px; text-align: center;
+    }
+    .hero-stat-val {
+      font-size: 22px; font-weight: 800; letter-spacing: -1px;
+      color: var(--lavender-deep); line-height: 1.2;
+    }
+    .hero-stat-label { font-size: 11px; color: var(--fg-muted); margin-top: 2px; }
+    .hero-card-links { display: flex; gap: 8px; }
+    .hero-link-btn {
+      flex: 1; display: flex; align-items: center; justify-content: center; gap: 5px;
+      background: var(--lavender-bg); border: 1px solid var(--lavender-mid);
+      border-radius: 8px; padding: 8px; font-size: 12px; font-weight: 600;
+      color: var(--lavender-deep); transition: all .15s;
+    }
+    .hero-link-btn:hover { background: var(--lavender); }
+
+    /* ════════════════════════
+       SECTION COMMON
+    ════════════════════════ */
+    .section { padding: 80px 0; }
+    .section-alt { background: var(--lavender-bg); }
+    .section-dark {
+      background: var(--lavender-deep); color: var(--white);
+    }
+    .sec-label {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 11px; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--lavender-dark);
+      margin-bottom: 10px;
+    }
+    .section-dark .sec-label { color: var(--lavender-mid); }
+    .sec-label::before {
+      content: ''; width: 18px; height: 2px;
+      background: var(--lavender-dark); border-radius: 1px;
+    }
+    .section-dark .sec-label::before { background: var(--lavender-mid); }
+    .sec-h2 {
+      font-size: 36px; font-weight: 800; letter-spacing: -1px;
+      line-height: 1.15; margin-bottom: 8px;
+    }
+    .sec-lead {
+      font-size: 16px; color: var(--fg-muted); line-height: 1.65;
+    }
+    .section-dark .sec-lead { color: rgba(255,255,255,0.7); }
+    .sec-header { margin-bottom: 48px; }
+    .sec-header-row {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      flex-wrap: wrap; gap: 16px; margin-bottom: 48px;
+    }
+
+    /* ════════════════════════
+       ABOUT / INTRO
+    ════════════════════════ */
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start;
+    }
+    .about-quote {
+      font-size: 22px; font-weight: 700; line-height: 1.5;
+      letter-spacing: -0.5px; color: var(--fg);
+      border-left: 4px solid var(--lavender-dark);
+      padding-left: 20px; margin-bottom: 24px;
+    }
+    .about-text { font-size: 15px; color: var(--fg-muted); line-height: 1.8; }
+    .about-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+    .tag {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: var(--lavender); border: 1px solid var(--lavender-mid);
+      border-radius: 9999px; padding: 4px 12px;
+      font-size: 12px; font-weight: 600; color: var(--lavender-deep);
+    }
+    .about-highlights { display: flex; flex-direction: column; gap: 16px; }
+    .highlight-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 20px 24px;
+      border-left: 4px solid var(--lavender-mid);
+      transition: border-left-color .2s, box-shadow .2s;
+    }
+    .highlight-card:hover {
+      border-left-color: var(--lavender-deep);
+      box-shadow: 0 4px 20px rgba(91,79,190,0.08);
+    }
+    .highlight-num {
+      font-size: 28px; font-weight: 800; color: var(--lavender-deep);
+      letter-spacing: -1px; line-height: 1.1;
+    }
+    .highlight-label {
+      font-size: 13px; color: var(--fg-muted); margin-top: 2px;
+    }
+
+    /* ════════════════════════
+       SKILLS
+    ════════════════════════ */
+    .skills-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px;
+    }
+    .skills-group-title {
+      font-size: 13px; font-weight: 700; color: var(--lavender-dark);
+      text-transform: uppercase; letter-spacing: .06em;
+      margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
+    }
+    .skills-group-title::after {
+      content: ''; flex: 1; height: 1px; background: var(--border);
+    }
+    .skill-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .skill-chip {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: var(--white); border: 1.5px solid var(--lavender-mid);
+      border-radius: 9999px; padding: 6px 14px;
+      font-size: 13px; font-weight: 600; color: var(--fg);
+      transition: all .15s;
+    }
+    .skill-chip:hover { background: var(--lavender); border-color: var(--lavender-dark); }
+    .skill-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+    /* ════════════════════════
+       CAREER TIMELINE
+    ════════════════════════ */
+    .timeline { position: relative; }
+    .timeline::before {
+      content: '';
+      position: absolute; left: 118px; top: 0; bottom: 0;
+      width: 2px; background: var(--lavender-mid);
+    }
+    .tl-item {
+      display: grid; grid-template-columns: 100px 1fr;
+      gap: 36px; position: relative; padding-bottom: 36px;
+    }
+    .tl-item:last-child { padding-bottom: 0; }
+    .tl-date {
+      text-align: right; font-size: 12px; color: var(--fg-muted);
+      line-height: 1.5; padding-top: 2px;
+    }
+    .tl-date strong { display: block; font-size: 11px; color: var(--lavender-dark); margin-bottom: 2px; }
+    .tl-body { position: relative; }
+    .tl-body::before {
+      content: '';
+      position: absolute; left: -24px; top: 6px;
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--lavender-deep);
+      border: 2px solid var(--white);
+      box-shadow: 0 0 0 2px var(--lavender-mid);
+    }
+    .tl-company {
+      font-size: 16px; font-weight: 700; margin-bottom: 2px;
+    }
+    .tl-role {
+      font-size: 12px; font-weight: 600; color: var(--lavender-dark);
+      background: var(--lavender); border-radius: 4px;
+      padding: 2px 8px; display: inline-block; margin-bottom: 8px;
+    }
+    .tl-desc { font-size: 13px; color: var(--fg-muted); line-height: 1.7; }
+    .tl-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+    .tl-tag {
+      font-size: 11px; color: var(--fg-muted);
+      border: 1px solid var(--border); border-radius: 4px;
+      padding: 2px 8px;
+    }
+
+    /* ════════════════════════
+       WORKS
+    ════════════════════════ */
+    .works-grid {
+      display: grid; grid-template-columns: 1fr; gap: 20px;
+    }
+    .work-card {
+      background: var(--card-bg); border: 1px solid var(--border);
+      border-radius: var(--radius-lg); overflow: hidden;
+      cursor: pointer; transition: all .22s;
+    }
+    .work-card:hover {
+      box-shadow: 0 12px 40px rgba(91,79,190,0.14);
+      transform: translateY(-4px);
+    }
+    .work-card.featured { grid-column: unset; }
+    .work-img-wrap {
+      width: 100%; aspect-ratio: 16/9;
+      overflow: hidden; background: var(--lavender-bg);
+      position: relative;
+      padding: 3px;
+      border-radius: calc(var(--radius-lg) - 1px) calc(var(--radius-lg) - 1px) 0 0;
+    }
+    .work-card.featured .work-img-wrap { aspect-ratio: 16/9; }
+    .work-img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform .35s ease;
+      border-radius: calc(var(--radius-lg) - 4px) calc(var(--radius-lg) - 4px) 0 0;
+    }
+    .work-card:hover .work-img { transform: scale(1.04); }
+    .work-badge {
+      position: absolute; top: 12px; left: 12px;
+      background: var(--white); border-radius: 6px;
+      padding: 3px 10px; font-size: 11px; font-weight: 700;
+      color: var(--lavender-deep);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    }
+    .work-info { padding: 18px 20px 20px; }
+    .work-meta { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+    .work-tag-sm {
+      font-size: 11px; color: var(--lavender-dark);
+      background: var(--lavender); border-radius: 4px;
+      padding: 2px 8px; font-weight: 600;
+    }
+    .work-title { font-size: 15px; font-weight: 700; margin-bottom: 4px; letter-spacing: -0.2px; }
+    .work-desc { font-size: 13px; color: var(--fg-muted); line-height: 1.6; }
+    .work-link {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 12px; font-weight: 600; color: var(--lavender-deep);
+      margin-top: 10px; transition: gap .15s;
+    }
+    .work-link:hover { gap: 8px; }
+
+    /* Special: Photoshop page card */
+    .ps-card {
+      grid-column: 1 / -1;
+      display: grid; grid-template-columns: 1fr 1fr;
+      background: linear-gradient(135deg, #0d1117, #1a1f2e);
+      border-radius: var(--radius-lg); overflow: hidden;
+      border: 1px solid rgba(196,181,244,0.2);
+    }
+    .ps-card-info {
+      padding: 40px 40px; display: flex; flex-direction: column;
+      justify-content: center;
+    }
+    .ps-card-label {
+      font-size: 11px; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--lavender-mid);
+      margin-bottom: 14px;
+    }
+    .ps-card-title {
+      font-size: 26px; font-weight: 800; color: var(--white);
+      letter-spacing: -0.6px; line-height: 1.25; margin-bottom: 12px;
+    }
+    .ps-card-desc {
+      font-size: 14px; color: rgba(255,255,255,0.6);
+      line-height: 1.7; margin-bottom: 24px;
+    }
+    .ps-card-preview {
+      overflow: hidden; position: relative;
+      background: #0d1117;
+    }
+    .ps-card-preview iframe {
+      width: 200%; height: 200%;
+      transform: scale(0.5); transform-origin: top left;
+      pointer-events: none; border: none;
+    }
+    .ps-card-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, transparent 40%, #0d1117 100%);
+    }
+
+    /* ════════════════════════
+       AWARDS
+    ════════════════════════ */
+    .awards-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+    }
+    .award-card {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 24px;
+      transition: all .2s;
+    }
+    .award-card:hover {
+      box-shadow: 0 8px 30px rgba(91,79,190,0.1);
+      border-color: var(--lavender-mid);
+    }
+    .award-icon { font-size: 28px; margin-bottom: 14px; }
+    .award-year {
+      font-size: 11px; font-weight: 700; color: var(--lavender-dark);
+      text-transform: uppercase; letter-spacing: .06em; margin-bottom: 6px;
+    }
+    .award-title { font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+    .award-org { font-size: 12px; color: var(--fg-muted); }
+
+    /* ════════════════════════
+       CERTIFICATIONS
+    ════════════════════════ */
+    .cert-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px;
+    }
+    .cert-card {
+      background: var(--white); border: 1.5px solid var(--lavender);
+      border-radius: var(--radius); padding: 16px;
+      transition: all .15s;
+    }
+    .cert-card:hover {
+      border-color: var(--lavender-dark);
+      background: var(--lavender-bg);
+    }
+    .cert-issuer {
+      font-size: 10px; font-weight: 700; color: var(--lavender-dark);
+      text-transform: uppercase; letter-spacing: .05em; margin-bottom: 5px;
+    }
+    .cert-name { font-size: 12px; font-weight: 600; line-height: 1.45; }
+
+    /* ════════════════════════
+       CONTACT CTA
+    ════════════════════════ */
+    .contact-inner {
+      text-align: center; max-width: 600px; margin: 0 auto;
+    }
+    .contact-inner .sec-h2 { margin-bottom: 16px; }
+    .contact-links {
+      display: flex; justify-content: center; gap: 12px;
+      flex-wrap: wrap; margin-top: 36px;
+    }
+    .contact-link {
+      display: flex; align-items: center; gap: 10px;
+      background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25);
+      border-radius: var(--radius); padding: 14px 22px;
+      font-size: 14px; font-weight: 600; color: var(--white);
+      transition: all .15s;
+    }
+    .contact-link:hover {
+      background: rgba(255,255,255,0.2);
+      border-color: rgba(255,255,255,0.4);
+    }
+    .contact-link-icon { font-size: 20px; }
+
+    /* ════════════════════════
+       FOOTER
+    ════════════════════════ */
+    .footer {
+      background: var(--fg); color: rgba(255,255,255,0.5);
+      padding: 32px 0; font-size: 13px;
+    }
+    .footer-inner {
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .footer-logo { color: var(--white); font-weight: 700; font-size: 15px; }
+
+    /* ════════════════════════
+       RESPONSIVE
+    ════════════════════════ */
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; }
+      .hero-card { max-width: 400px; }
+      .hero h1 { font-size: 40px; }
+      .about-grid, .skills-grid { grid-template-columns: 1fr; }
+      .works-grid { grid-template-columns: 1fr; }
+      .work-card.featured { grid-column: 1; }
+      .ps-card { grid-template-columns: 1fr; }
+      .ps-card-preview { min-height: 200px; }
+      .awards-grid { grid-template-columns: 1fr 1fr; }
+      .cert-grid { grid-template-columns: repeat(2, 1fr); }
+      .timeline::before { left: 80px; }
+      .tl-item { grid-template-columns: 68px 1fr; gap: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a href="#" class="nav-logo">백연우</a>
+      <div class="nav-links">
+        <a href="#about" class="nav-link">소개</a>
+        <a href="#skills" class="nav-link">스킬</a>
+        <a href="#career" class="nav-link">경력</a>
+        <a href="#works" class="nav-link">작업물</a>
+        <a href="#awards" class="nav-link">수상</a>
+        <a href="#contact" class="nav-link">연락하기</a>
+      </div>
+      <div class="nav-right">
+        <a href="#contact" class="btn btn-primary" style="font-size:13px; padding:7px 16px;">프로젝트 문의</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <div class="fade-up">
+        <div class="hero-tag">
+          <span class="hero-tag-dot"></span>
+          2D Designer · Character Artist · UI Designer
+        </div>
+        <h1>캐릭터 원화부터<br><em>브랜드 콘텐츠</em>까지,<br>실전 6년의 디자이너</h1>
+        <p class="hero-sub">캐릭터 디자인, UI, 웹툰, 마케팅 콘텐츠까지 폭넓게 다루는 디자이너입니다. AI 도구를 적극 활용하며 더 빠르고 넓은 창작으로 나아가고 있습니다.</p>
+        <div class="hero-actions">
+          <a href="#works" class="btn btn-primary">작업물 보기 →</a>
+        </div>
+        <div class="hero-meta">
+          <span class="hero-meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.63A2 2 0 012 1h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.27 8.91a16 16 0 006.72 6.72l1-1a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+            010-3705-0221
+          </span>
+          <span class="hero-meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            ellieback1030@gmail.com
+          </span>
+          <span class="hero-meta-item">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+            @dinong.official (6K+)
+          </span>
+        </div>
+      </div>
+
+      <div class="hero-card fade-up" style="transition-delay:.15s">
+        <div class="hero-photo">🎨</div>
+        <div class="hero-name-row">
+          <span class="hero-name">백연우</span>
+          <span class="avail-badge"><span class="avail-dot"></span>구직 중</span>
+        </div>
+        <div class="hero-role">2D Character &amp; Brand Designer</div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <div class="hero-stat-val">6년+</div>
+            <div class="hero-stat-label">실무 경력</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-val">14+</div>
+            <div class="hero-stat-label">자격증</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-val">3개</div>
+            <div class="hero-stat-label">수상 이력</div>
+          </div>
+        </div>
+        <div class="hero-card-links">
+          <a href="mailto:ellieback1030@gmail.com" class="hero-link-btn">✉ 이메일</a>
+          <a href="https://instagram.com/dinong.official" target="_blank" class="hero-link-btn">📷 인스타그램</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="fade-up">
+          <div class="sec-label">About</div>
+          <div class="about-quote">"저는 프로젝트의 디자인 의도를 정확히 파악하고, 이를 시각적으로 구현하는 전 과정을 능숙하게 수행할 수 있습니다."</div>
+          <p class="about-text">
+            6년간 디자이너로 일해 왔습니다. 캐릭터 제작부터 브랜드 콘텐츠 개발까지 다양한 분야에서 활동하며,
+            GS Retail, Mega MGC Coffee, 삼성전자, 경기도청 등 다양한 클라이언트를 위한 마케팅 콘텐츠를 제작했습니다.<br><br>
+            현재 AI 도구를 적극적으로 실험하고 있으며, Anthropic Claude 교육과정 11개를 수료하고 GAIQ 인증도 보유하고 있습니다.
+          </p>
+          <div class="about-tags">
+            <span class="tag">캐릭터 디자인</span>
+            <span class="tag">UI 디자인</span>
+            <span class="tag">웹툰·인스타툰</span>
+            <span class="tag">브랜드 콘텐츠</span>
+            <span class="tag">AI 협업</span>
+            <span class="tag">팀 리드</span>
+          </div>
+        </div>
+        <div class="about-highlights fade-up" style="transition-delay:.1s">
+          <div class="highlight-card">
+            <div class="highlight-num">6년 4개월</div>
+            <div class="highlight-label">총 실무 경력 · 소프트플렉스, 조이스터디, 에덴파트너스코리아 등</div>
+          </div>
+          <div class="highlight-card">
+            <div class="highlight-num">11개</div>
+            <div class="highlight-label">Anthropic Claude 수료 과정 · AI 도구 전문 역량 보유</div>
+          </div>
+          <div class="highlight-card">
+            <div class="highlight-num">6,000+</div>
+            <div class="highlight-label">인스타그램 팔로워 (@dinong.official) · 브랜드 콘텐츠 운영 경험</div>
+          </div>
+          <div class="highlight-card">
+            <div class="highlight-num">행정안전부 장관상</div>
+            <div class="highlight-label">2021 실패박람회 우수서포터즈 크리에이터</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section class="section section-alt" id="skills">
+    <div class="container">
+      <div class="sec-header fade-up">
+        <div class="sec-label">Skills</div>
+        <h2 class="sec-h2">사용 도구 & 스킬</h2>
+        <p class="sec-lead">캐릭터 제작부터 UI, 3D, AI 협업까지 폭넓은 툴셋을 보유하고 있습니다.</p>
+      </div>
+      <div class="skills-grid fade-up" style="transition-delay:.1s">
+        <div>
+          <div class="skills-group-title">디자인 툴</div>
+          <div class="skill-chips">
+            <span class="skill-chip"><span class="skill-dot" style="background:#FF9A00;"></span>Illustrator</span>
+            <span class="skill-chip"><span class="skill-dot" style="background:#31A8FF;"></span>Photoshop</span>
+            <span class="skill-chip"><span class="skill-dot" style="background:#F24E1E;"></span>Figma</span>
+            <span class="skill-chip"><span class="skill-dot" style="background:#FF61F6;"></span>Adobe XD</span>
+            <span class="skill-chip"><span class="skill-dot" style="background:#9999FF;"></span>After Effects</span>
+          </div>
+        </div>
+        <div>
+          <div class="skills-group-title">3D & 게임</div>
+          <div class="skill-chips">
+            <span class="skill-chip"><span class="skill-dot" style="background:#E87D0D;"></span>Blender</span>
+            <span class="skill-chip"><span class="skill-dot" style="background:#222;"></span>Unity</span>
+            <span class="skill-chip"><span class="skill-dot" style="background:#7C6FCD;"></span>Tilemap 디자인</span>
+            <span class="skill-chip"><span class="skill-dot" style="background:#4A90D9;"></span>Sprite 디자인</span>
+          </div>
+        </div>
+        <div>
+          <div class="skills-group-title">콘텐츠 & 마케팅</div>
+          <div class="skill-chips">
+            <span class="skill-chip"><span class="skill-dot" style="background:#E1306C;"></span>인스타툰 제작</span>
+            <span class="skill-chip"><span class="skill-dot" style="background:#48B0F7;"></span>웹툰</span>
+            <span class="skill-chip"><span class="skill-dot" style="background:#34A853;"></span>GAIQ (Google Analytics)</span>
+            <span class="skill-chip"><span class="skill-dot" style="background:#EA4335;"></span>마케팅 배너</span>
+          </div>
+        </div>
+        <div>
+          <div class="skills-group-title">AI & 기타</div>
+          <div class="skill-chips">
+            <span class="skill-chip"><span class="skill-dot" style="background:#CC785C;"></span>Claude API</span>
+            <span class="skill-chip"><span class="skill-dot" style="background:#5B4FBE;"></span>MCP 활용</span>
+            <span class="skill-chip"><span class="skill-dot" style="background:#2B2B2B;"></span>일본어 N2</span>
+            <span class="skill-chip"><span class="skill-dot" style="background:#6b6b80;"></span>팀 리드·일정관리</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAREER -->
+  <section class="section" id="career">
+    <div class="container">
+      <div class="sec-header fade-up">
+        <div class="sec-label">Career</div>
+        <h2 class="sec-h2">경력 사항</h2>
+        <p class="sec-lead">총 6년 4개월 · 교육용 게임/앱 디자인 중심, 브랜드 콘텐츠 및 팀 매니지먼트 경험 보유</p>
+      </div>
+      <div class="timeline fade-up" style="transition-delay:.1s">
+        <div class="tl-item">
+          <div class="tl-date">
+            <strong>2025.04 — 2025.11</strong>
+            8개월
+          </div>
+          <div class="tl-body">
+            <div class="tl-company">소프트플렉스</div>
+            <span class="tl-role">디자인팀 과장</span>
+            <p class="tl-desc">디자인팀 업무 전반을 맡아 프로젝트 일정을 관리하고 산출물 검수까지 책임졌습니다. 팀원들의 작업 방향을 조율하면서 교육용 게임·앱 디자인 전반의 완성도를 유지했습니다.</p>
+            <div class="tl-tags">
+              <span class="tl-tag">팀 리드</span>
+              <span class="tl-tag">캐릭터 디자인</span>
+              <span class="tl-tag">UI 디자인</span>
+              <span class="tl-tag">Tilemap</span>
+            </div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">
+            <strong>2022.12 — 2024.09</strong>
+            1년 10개월
+          </div>
+          <div class="tl-body">
+            <div class="tl-company">소프트플렉스</div>
+            <span class="tl-role">디자인팀 대리</span>
+            <p class="tl-desc">영어·수학 학습용 게임 앱의 캐릭터와 일러스트를 디자인하고, 학습 콘텐츠 앱의 UI 작업을 담당했습니다. 게임 내부 배경, Tilemap 작업까지 병행했습니다.</p>
+            <div class="tl-tags">
+              <span class="tl-tag">캐릭터 디자인</span>
+              <span class="tl-tag">앱 UI</span>
+              <span class="tl-tag">배경 디자인</span>
+            </div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">
+            <strong>2021.06 — 2022.12</strong>
+            1년 7개월
+          </div>
+          <div class="tl-body">
+            <div class="tl-company">주식회사 조이스터디</div>
+            <span class="tl-role">디자이너</span>
+            <p class="tl-desc">교육용 RPG 게임의 캐릭터 컨셉과 인게임 Sprite를 설계하고, 배경 컨셉 및 Tilemap 디자인을 함께 진행했습니다. 게임 UI 작업과 앱 마스코트 캐릭터 디자인도 담당했습니다.</p>
+            <div class="tl-tags">
+              <span class="tl-tag">RPG 캐릭터</span>
+              <span class="tl-tag">Sprite</span>
+              <span class="tl-tag">마스코트</span>
+            </div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-date">
+            <strong>2018.11 — 2020.07</strong>
+            1년 9개월
+          </div>
+          <div class="tl-body">
+            <div class="tl-company">주식회사 에덴파트너스코리아</div>
+            <span class="tl-role">2D 디자이너</span>
+            <p class="tl-desc">블록체인 기반 HTML 게임 11종의 UI를 디자인하고, 홈페이지 마스코트 캐릭터 4종을 제작했습니다. GS Retail, Mega MGC Coffee, 삼성전자, 경기도청 등 다수 브랜드 콘텐츠 제작.</p>
+            <div class="tl-tags">
+              <span class="tl-tag">게임 UI</span>
+              <span class="tl-tag">마스코트</span>
+              <span class="tl-tag">브랜드 콘텐츠</span>
+              <span class="tl-tag">마케팅 배너</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORKS -->
+  <section class="section section-alt" id="works">
+    <div class="container">
+      <div class="sec-header-row">
+        <div class="fade-up">
+          <div class="sec-label">Works</div>
+          <h2 class="sec-h2">작업물 &amp; 프로젝트</h2>
+          <p class="sec-lead">캐릭터, UI, 웹툰, 웹 디자인까지 다양한 작업을 소개합니다.</p>
+        </div>
+        <a href="portfolio-works.html" class="btn btn-outline fade-up" style="transition-delay:.1s">포트폴리오 PDF 보기 →</a>
+      </div>
+
+      <!-- Photoshop Service Page — Featured -->
+      <div class="ps-card fade-up" style="margin-bottom:20px;">
+        <div class="ps-card-info">
+          <div class="ps-card-label">✦ Web Design Project (개인작업물)</div>
+          <div class="ps-card-title">Adobe Photoshop<br>서비스 소개 홈페이지</div>
+          <p class="ps-card-desc">
+            Adobe Photoshop의 기능과 가격 플랜을 소개하는 서비스 홈페이지를 디자인했습니다.
+            shadcn/ui 디자인 시스템을 기반으로 갤러리, 가격제, 기능 소개 섹션을 구성했습니다.
+          </p>
+          <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:20px;">
+            <span class="work-tag-sm" style="background:rgba(196,181,244,0.15); color:var(--lavender-mid);">HTML/CSS</span>
+            <span class="work-tag-sm" style="background:rgba(196,181,244,0.15); color:var(--lavender-mid);">Web Design</span>
+            <span class="work-tag-sm" style="background:rgba(196,181,244,0.15); color:var(--lavender-mid);">UI/UX</span>
+          </div>
+          <a href="adobe-photoshop.html" target="_blank" class="btn btn-primary">사이트 보기 →</a>
+        </div>
+        <div class="ps-card-preview">
+          <iframe src="adobe-photoshop.html" scrolling="no" tabindex="-1"></iframe>
+          <div class="ps-card-overlay"></div>
+        </div>
+      </div>
+
+      <!-- Other work cards -->
+      <div class="works-grid fade-up" style="transition-delay:.15s">
+        <div class="work-card featured">
+          <div class="work-img-wrap">
+            <img class="work-img" src="game-screenshot.png" alt="캐릭터 디자인 작업" />
+            <span class="work-badge">대표작</span>
+          </div>
+          <div class="work-info">
+            <div class="work-meta">
+              <span class="work-tag-sm">캐릭터 디자인</span>
+              <span class="work-tag-sm">2D 일러스트</span>
+            </div>
+            <div class="work-title">교육용 게임 캐릭터 & 스프라이트 디자인</div>
+            <p class="work-desc">소프트플렉스에서 6년간 작업한 영어·수학 학습 게임 앱의 캐릭터 및 Sprite 디자인. 인게임 배경, Tilemap, 마스코트까지 포함한 교육용 콘텐츠 시각 자산 전반.</p>
+            <a href="portfolio-works.html" class="work-link">포트폴리오 PDF →</a>
+          </div>
+        </div>
+        <div class="work-card">
+          <div class="work-img-wrap">
+            <img class="work-img" src="webtoon-failexpo.png" alt="행정안전부 실패박람회 인스타툰" />
+          </div>
+          <div class="work-info">
+            <div class="work-meta">
+              <span class="work-tag-sm">웹툰</span>
+              <span class="work-tag-sm">공공기관</span>
+            </div>
+            <div class="work-title">행정안전부 실패박람회 인스타툰</div>
+            <p class="work-desc">우수 서포터즈로 선정 후 7개월간 제작한 정책 홍보 인스타툰. 행정안전부 장관상 수상.</p>
+            <a href="portfolio-works.html" class="work-link">포트폴리오 PDF →</a>
+          </div>
+        </div>
+        <div class="work-card">
+          <div class="work-img-wrap">
+            <img class="work-img" src="webtoon-brand.png" alt="브랜드 후원 마케팅 콘텐츠" />
+          </div>
+          <div class="work-info">
+            <div class="work-meta">
+              <span class="work-tag-sm">브랜드</span>
+              <span class="work-tag-sm">마케팅</span>
+            </div>
+            <div class="work-title">브랜드 후원 마케팅 콘텐츠</div>
+            <p class="work-desc">GS Retail, Mega MGC Coffee, 삼성전자, 경기도청 등 다양한 클라이언트를 위한 마케팅 배너 및 삽화 제작.</p>
+            <a href="portfolio-works.html" class="work-link">포트폴리오 PDF →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AWARDS -->
+  <section class="section" id="awards">
+    <div class="container">
+      <div class="sec-header fade-up">
+        <div class="sec-label">Awards</div>
+        <h2 class="sec-h2">수상 이력</h2>
+      </div>
+      <div class="awards-grid fade-up" style="transition-delay:.1s">
+        <div class="award-card">
+          <div class="award-icon">🏛️</div>
+          <div class="award-year">2021년</div>
+          <div class="award-title">행정안전부 장관상</div>
+          <div class="award-org">2021 실패박람회 우수서포터즈 크리에이터 · 행정안전부</div>
+        </div>
+        <div class="award-card">
+          <div class="award-icon">🏆</div>
+          <div class="award-year">2022년</div>
+          <div class="award-title">다함께 술술 웹툰 공모전 장려상</div>
+          <div class="award-org">숙련기술 웹툰 제작 공모전 · 한국산업인력공단 글로벌숙련기술진흥원</div>
+        </div>
+        <div class="award-card">
+          <div class="award-icon">🎖️</div>
+          <div class="award-year">2025년</div>
+          <div class="award-title">안성경찰서 감사장</div>
+          <div class="award-org">기초질서 확립 및 선진 교통문화 정착 기여 · 안전캠페인 웹툰 재능기부</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section class="section section-alt">
+    <div class="container">
+      <div class="sec-header fade-up">
+        <div class="sec-label">Certifications</div>
+        <h2 class="sec-h2">자격증 & 수료</h2>
+        <p class="sec-lead">AI 교육부터 디자인, 어학까지 14개 이상의 자격 보유</p>
+      </div>
+      <div class="cert-grid fade-up" style="transition-delay:.1s">
+        <div class="cert-card">
+          <div class="cert-issuer">Anthropic Education</div>
+          <div class="cert-name">Teaching AI Fluency</div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-issuer">Anthropic Education</div>
+          <div class="cert-name">Model Context Protocol: Advanced Topics</div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-issuer">Anthropic Education</div>
+          <div class="cert-name">Claude Code in Action</div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-issuer">Anthropic Education</div>
+          <div class="cert-name">Building with the Claude API</div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-issuer">Anthropic Education</div>
+          <div class="cert-name">AI Fluency: Framework & Foundations</div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-issuer">Anthropic Education</div>
+          <div class="cert-name">Introduction to Model Context Protocol</div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-issuer">Anthropic Education</div>
+          <div class="cert-name">Claude 101 · Introduction to agent skills</div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-issuer">Google</div>
+          <div class="cert-name">GAIQ — Google Analytics Individual Qualification</div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-issuer">일본국제교육협회</div>
+          <div class="cert-name">新JLPT N2급 (2013.08)</div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-issuer">교육부</div>
+          <div class="cert-name">중등학교정교사 (2014.02)</div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-issuer">Anthropic Education</div>
+          <div class="cert-name">AI Fluency for students · educators · nonprofits</div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-issuer">더조은아카데미학원</div>
+          <div class="cert-name">게임그래픽전문가양성과정 (2018)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section section-dark" id="contact">
+    <div class="container">
+      <div class="contact-inner fade-up">
+        <div class="sec-label">Contact</div>
+        <h2 class="sec-h2" style="color:var(--white);">함께 작업해요</h2>
+        <p class="sec-lead">캐릭터, 브랜드 콘텐츠, UI 디자인, 웹툰 등 어떤 프로젝트든 환영합니다.<br>정규직 서울 전 지역 가능합니다.</p>
+        <div class="contact-links">
+          <a href="mailto:ellieback1030@gmail.com" class="contact-link">
+            <span class="contact-link-icon">✉️</span>
+            <span>
+              <div style="font-size:11px; opacity:0.6; font-weight:400;">이메일</div>
+              ellieback1030@gmail.com
+            </span>
+          </a>
+          <a href="tel:010-3705-0221" class="contact-link">
+            <span class="contact-link-icon">📞</span>
+            <span>
+              <div style="font-size:11px; opacity:0.6; font-weight:400;">전화</div>
+              010-3705-0221
+            </span>
+          </a>
+          <a href="https://instagram.com/dinong.official" target="_blank" class="contact-link">
+            <span class="contact-link-icon">📷</span>
+            <span>
+              <div style="font-size:11px; opacity:0.6; font-weight:400;">인스타그램</div>
+              @dinong.official
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span class="footer-logo">백연우 Portfolio</span>
+      <span>© 2026 Back Yeonwoo. All rights reserved.</span>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll-triggered fade-up
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Active nav highlight
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => {
+        if (window.scrollY >= s.offsetTop - 120) current = s.id;
+      });
+      navLinks.forEach(l => {
+        l.classList.toggle('active', l.getAttribute('href') === '#' + current);
+      });
+    });
+  </script>
+</body>
+</html>
