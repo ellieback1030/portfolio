@@ -94,6 +94,17 @@ img { display: block; max-width: 100%; }
   background: transparent; color: var(--fg-muted); border: 1px solid var(--border);
 }
 .btn-ghost:hover { background: var(--lavender-bg); color: var(--lavender-deep); }
+.btn-pdf-cta {
+  background: var(--lavender-deep); color: #fff;
+  padding: 12px 24px; font-size: 15px; gap: 8px;
+  box-shadow: 0 4px 16px rgba(90,75,200,.30);
+  border: none;
+}
+.btn-pdf-cta:hover {
+  background: #4a3fad;
+  box-shadow: 0 6px 20px rgba(90,75,200,.45);
+  transform: translateY(-2px);
+}
 
 /* ════════════════════════
    SECTION COMMON
